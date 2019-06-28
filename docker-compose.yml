@@ -1,0 +1,17 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5555:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    tty: true
+    restart: always
+    user: root
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    environment:
+      - TZ=`ls -la /etc/localtime | cut -d/ -f8-9`
