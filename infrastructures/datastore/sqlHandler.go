@@ -1,10 +1,9 @@
-package infrastructure
+package datastore
 
 import (
 	"database/sql"
-	"fmt"
 
-	"github.com/halkn/echo-sample/interfaces/presenters"
+	"github.com/halkn/echo-sample/interfaces/gateway"
 
 	// "lib/pq" is a package fot postgresql driver and is not used directly.
 	_ "github.com/lib/pq"
@@ -16,22 +15,12 @@ type SQLHandler struct {
 }
 
 // NewSQLHandler create a new sqlhandler.
-func NewSQLHandler() *SQLHandler {
-
-	conn, err := sql.Open("postgres", "host=127.0.0.1 port=5555 user=postgres password=password dbname=tododb sslmode=disable")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	sqlHandler := new(SQLHandler)
-	sqlHandler.Conn = conn
-
-	return sqlHandler
-
+func NewSQLHandler(conn *sql.DB) *SQLHandler {
+	return &SQLHandler{Conn: conn}
 }
 
 // Query exetutes a query that returns rows.
-func (sqlHandler *SQLHandler) Query(statement string, args ...interface{}) (presenters.Row, error) {
+func (sqlHandler *SQLHandler) Query(statement string, args ...interface{}) (gateway.Row, error) {
 
 	rows, err := sqlHandler.Conn.Query(statement)
 	if err != nil {
