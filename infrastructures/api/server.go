@@ -21,6 +21,9 @@ func Run(todoController *controllers.TodoController) {
 	e.GET("/todos", func(c echo.Context) error {
 		return todoController.GetTodos(c)
 	})
+	e.GET("/todos/:id", func(c echo.Context) error {
+		return todoController.GetTodoByID(c)
+	})
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

@@ -22,7 +22,7 @@ func NewSQLHandler(conn *sql.DB) *SQLHandler {
 // Query exetutes a query that returns rows.
 func (sqlHandler *SQLHandler) Query(statement string, args ...interface{}) (gateway.Row, error) {
 
-	rows, err := sqlHandler.Conn.Query(statement)
+	rows, err := sqlHandler.Conn.Query(statement, args...)
 	if err != nil {
 		return new(SQLRow), err
 	}
