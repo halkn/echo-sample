@@ -6,13 +6,18 @@ import (
 
 // TodoRepository is struct of todo.
 type TodoRepository struct {
-	SqlHandler SQLHandler
+	SQLHandler
+}
+
+// NewTodoRepository is constructor that creates TodoRepository
+func NewTodoRepository(handler SQLHandler) *TodoRepository {
+	return &TodoRepository{handler}
 }
 
 // FindAll will return all recode of todo table.
 func (repo *TodoRepository) FindAll() (todos entity.Todos, err error) {
 
-	rows, err := repo.SqlHandler.Query("select * from todo")
+	rows, err := repo.Query("select * from todo")
 	defer rows.Close()
 	if err != nil {
 		return

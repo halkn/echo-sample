@@ -3,29 +3,22 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/halkn/echo-sample/interfaces/gateway"
 	"github.com/halkn/echo-sample/usecase"
 )
 
 // TodoController ...
 type TodoController struct {
-	Interactor usecase.TodoInteractor
+	usecase.TodoUsecase
 }
 
 // NewTodoController create TodoController instance.
-func NewTodoController(sqlHandler gateway.SQLHandler) *TodoController {
-	return &TodoController{
-		Interactor: usecase.TodoInteractor{
-			TodoRepository: &gateway.TodoRepository{
-				SqlHandler: sqlHandler,
-			},
-		},
-	}
+func NewTodoController(usecase usecase.TodoUsecase) *TodoController {
+	return &TodoController{usecase}
 }
 
 // GetTodos returns all of todos as JSON object.
 func (controller *TodoController) GetTodos(c Context) error {
-	todos, err := controller.Interactor.GetAllTodos()
+	todos, err := controller.TodoUsecase.GetAllTodos()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, nil)
 	}

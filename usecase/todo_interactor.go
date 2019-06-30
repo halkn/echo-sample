@@ -9,7 +9,12 @@ type TodoInteractor struct {
 	TodoRepository
 }
 
+// NewTodoInteractor is constructor that creates TodoInteractor
+func NewTodoInteractor(repo TodoRepository) *TodoInteractor {
+	return &TodoInteractor{repo}
+}
+
 // GetAllTodos returns All of todos.
 func (interactor *TodoInteractor) GetAllTodos() (entity.Todos, error) {
-	return interactor.TodoRepository.FindAll()
+	return interactor.FindAll()
 }

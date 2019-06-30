@@ -4,20 +4,20 @@ import (
 	"fmt"
 
 	"github.com/halkn/echo-sample/infrastructures/api"
-	"github.com/halkn/echo-sample/infrastructures/datastore"
-	"github.com/halkn/echo-sample/interfaces/controllers"
+	"github.com/halkn/echo-sample/registory"
 )
 
 func main() {
 
-	conn := datastore.NewDB()
+	// conn := datastore.NewDB()
+	conn := registory.InjectDB()
 	defer func() {
 		if err := conn.Close(); err != nil {
 			fmt.Println(err)
 		}
 	}()
 
-	todoController := controllers.NewTodoController(datastore.NewSQLHandler(conn))
+	todoController := registory.InjectTodoController()
 
 	api.NewRouter(todoController)
 }
