@@ -18,3 +18,8 @@ func NewTodoInteractor(repo TodoRepository) *TodoInteractor {
 func (interactor *TodoInteractor) GetAllTodos() (entity.Todos, error) {
 	return interactor.FindAll()
 }
+
+// GetTodosByID returns todo whoes that ID mathces.
+func (interactor *TodoInteractor) GetTodosByID(id string) (entity.Todos, error) {
+	return interactor.FindByID(id)
+}

@@ -31,3 +31,22 @@ func (repo *TodoRepository) FindAll() (todos entity.Todos, err error) {
 
 	return
 }
+
+// FindByID will return todo whoes ID mathces
+func (repo *TodoRepository) FindByID(id string) (todos entity.Todos, err error) {
+
+	rows, err := repo.Query("select * from todo where ID = $1", id)
+	defer rows.Close()
+	if err != nil {
+		return
+	}
+
+	for rows.Next() {
+		var todo entity.Todo
+		rows.Scan(&todo.ID, &todo.Title, &todo.Content, &todo.Status)
+		todos = append(todos, todo)
+	}
+
+	return
+
+}
