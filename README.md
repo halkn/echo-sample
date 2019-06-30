@@ -10,12 +10,25 @@ This is an sample of todo app.
 
 ## Run
 
+### Run command
+
 ```sh
 docker-compose up -d
 go run *go
 ```
 
-Access to `localhost:1323/todos` after above execution.
+### Startup confirmation
+
+Access to `localhost:1323/` after above execution.  
+Then you will see `Hello world!` in your browser.
+
+### Exapmple
+
+```sh
+curl localhost:1323/todos
+curl localhost:1323/todos/1
+curl -i -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"ID": 4, "Title": "todo4","Content": "sample-todo","Status": "0"}' localhost:1323/todos
+```
 
 ## License
 

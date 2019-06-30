@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/halkn/echo-sample/entity"
 	"github.com/halkn/echo-sample/usecase"
 )
 
@@ -35,5 +36,19 @@ func (controller *TodoController) GetTodoByID(c Context) error {
 	}
 
 	return c.JSON(http.StatusOK, todo)
+
+}
+
+// Create create a new todo.
+func (controller *TodoController) Create(c Context) error {
+	u := entity.Todo{}
+	c.Bind(&u)
+
+	todo, err := controller.TodoUsecase.CreateTodo(u)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(http.StatusCreated, todo)
 
 }

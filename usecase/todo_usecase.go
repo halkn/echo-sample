@@ -6,4 +6,5 @@ import "github.com/halkn/echo-sample/entity"
 type TodoUsecase interface {
 	GetAllTodos() (entity.Todos, error)
 	GetTodosByID(string) (entity.Todos, error)
+	CreateTodo(entity.Todo) (int, error)
 }

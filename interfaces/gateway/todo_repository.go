@@ -50,3 +50,15 @@ func (repo *TodoRepository) FindByID(id string) (todos entity.Todos, err error) 
 	return
 
 }
+
+// Store add a new todo recode.
+func (repo *TodoRepository) Store(todo entity.Todo) (int, error) {
+
+	_, err := repo.Exec("insert into todo (ID, Title, Content ,Status) values ($1,$2,$3,$4)", todo.ID, todo.Title, todo.Content, todo.Status)
+	// _, err := repo.Exec("insert into todo (ID, Title, Content ,Status) values (4,'todo4','todo-sample','0')")
+	if err != nil {
+		return 1, err
+	}
+
+	return 0, nil
+}
