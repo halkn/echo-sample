@@ -8,8 +8,8 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-// NewRouter create a new instance of http server and route.
-func NewRouter(todoController *controllers.TodoController) {
+// Run create a new instance of http server and route.
+func Run(todoController *controllers.TodoController) {
 	e := echo.New()
 
 	e.Use(middleware.Logger())

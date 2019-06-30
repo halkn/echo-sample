@@ -19,5 +19,5 @@ func main() {
 
 	todoController := registory.InjectTodoController()
 
-	api.NewRouter(todoController)
+	api.Run(todoController)
 }
