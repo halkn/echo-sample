@@ -6,10 +6,10 @@ import (
 
 // TodoInteractor is an interactor for Todo entity.
 type TodoInteractor struct {
-	TodoUsecase
+	TodoRepository
 }
 
-// FindAll returns All of todos.
-func (interactor *TodoInteractor) FindAll() (entity.Todos, error) {
-	return interactor.TodoUsecase.FindAll()
+// GetAllTodos returns All of todos.
+func (interactor *TodoInteractor) GetAllTodos() (entity.Todos, error) {
+	return interactor.TodoRepository.FindAll()
 }

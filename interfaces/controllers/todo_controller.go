@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/halkn/echo-sample/interfaces/gateway"
-	"github.com/halkn/echo-sample/interfaces/presenters"
 	"github.com/halkn/echo-sample/usecase"
 )
 
@@ -17,7 +16,7 @@ type TodoController struct {
 func NewTodoController(sqlHandler gateway.SQLHandler) *TodoController {
 	return &TodoController{
 		Interactor: usecase.TodoInteractor{
-			TodoUsecase: &presenters.TodoRepository{
+			TodoRepository: &gateway.TodoRepository{
 				SqlHandler: sqlHandler,
 			},
 		},
@@ -26,7 +25,7 @@ func NewTodoController(sqlHandler gateway.SQLHandler) *TodoController {
 
 // GetTodos returns all of todos as JSON object.
 func (controller *TodoController) GetTodos(c Context) error {
-	todos, err := controller.Interactor.FindAll()
+	todos, err := controller.Interactor.GetAllTodos()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, nil)
 	}

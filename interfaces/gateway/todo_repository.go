@@ -1,13 +1,12 @@
-package presenters
+package gateway
 
 import (
 	"github.com/halkn/echo-sample/entity"
-	"github.com/halkn/echo-sample/interfaces/gateway"
 )
 
 // TodoRepository is struct of todo.
 type TodoRepository struct {
-	SqlHandler gateway.SQLHandler
+	SqlHandler SQLHandler
 }
 
 // FindAll will return all recode of todo table.
