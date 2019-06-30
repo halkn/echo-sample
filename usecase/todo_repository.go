@@ -6,4 +6,5 @@ import "github.com/halkn/echo-sample/entity"
 type TodoRepository interface {
 	FindAll() (entity.Todos, error)
 	FindByID(string) (entity.Todos, error)
+	Store(entity.Todo) (int, error)
 }

@@ -23,3 +23,8 @@ func (interactor *TodoInteractor) GetAllTodos() (entity.Todos, error) {
 func (interactor *TodoInteractor) GetTodosByID(id string) (entity.Todos, error) {
 	return interactor.FindByID(id)
 }
+
+// CreateTodo create a new todo.
+func (interactor *TodoInteractor) CreateTodo(todo entity.Todo) (int, error) {
+	return interactor.Store(todo)
+}
