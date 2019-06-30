@@ -1,8 +1,6 @@
-package presenters
+package gateway
 
 import (
-	"fmt"
-
 	"github.com/halkn/echo-sample/entity"
 )
 
@@ -11,11 +9,15 @@ type TodoRepository struct {
 	SQLHandler
 }
 
+// NewTodoRepository is constructor that creates TodoRepository
+func NewTodoRepository(handler SQLHandler) *TodoRepository {
+	return &TodoRepository{handler}
+}
+
 // FindAll will return all recode of todo table.
 func (repo *TodoRepository) FindAll() (todos entity.Todos, err error) {
 
 	rows, err := repo.Query("select * from todo")
-	fmt.Println("debug")
 	defer rows.Close()
 	if err != nil {
 		return

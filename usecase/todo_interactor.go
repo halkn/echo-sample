@@ -6,10 +6,15 @@ import (
 
 // TodoInteractor is an interactor for Todo entity.
 type TodoInteractor struct {
-	TodoRepository TodoRepository
+	TodoRepository
 }
 
-// FindAll returns All of todos.
-func (interactor *TodoInteractor) FindAll() (entity.Todos, error) {
-	return interactor.TodoRepository.FindAll()
+// NewTodoInteractor is constructor that creates TodoInteractor
+func NewTodoInteractor(repo TodoRepository) *TodoInteractor {
+	return &TodoInteractor{repo}
+}
+
+// GetAllTodos returns All of todos.
+func (interactor *TodoInteractor) GetAllTodos() (entity.Todos, error) {
+	return interactor.FindAll()
 }

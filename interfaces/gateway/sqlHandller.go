@@ -1,4 +1,4 @@
-package presenters
+package gateway
 
 // SQLHandler is interface of SQLHandler
 type SQLHandler interface {

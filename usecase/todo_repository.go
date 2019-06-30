@@ -2,7 +2,7 @@ package usecase
 
 import "github.com/halkn/echo-sample/entity"
 
-// TodoRepository is an repository for Todo entity.
+// TodoRepository ...
 type TodoRepository interface {
 	FindAll() (entity.Todos, error)
 }
